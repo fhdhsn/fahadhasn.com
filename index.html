@@ -9,7 +9,7 @@
   <meta name="author" content="Fahad Hassan">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fahadhasn.com/">
-  <meta name="theme-color" content="#15120b">
+  <meta name="theme-color" content="#080604">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -43,255 +43,357 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <script>
+    document.documentElement.className += ' js';
+    // Safety net: if scripts fail to boot, never trap the visitor behind the preloader
+    window.__bootGuard = setTimeout(function () {
+      document.documentElement.classList.add('boot-fallback');
+    }, 4000);
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <noscript><style>#preloader, .cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
 </head>
 <body>
 
-  <nav>
-    <div class="container">
-      <a class="brand" href="/">fahad<span class="slash">/</span>hassan</a>
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="links">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="chargepk.html">ChargePK</a>
-        <a href="support.html">Contact</a>
+  <a class="skip-link" href="#services">Skip to content</a>
+
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-brand">fahad<span>/</span>hassan</div>
+    <div class="pre-bar"><span id="preBar"></span></div>
+    <div class="pre-count" id="preCount">0</div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- Three.js golden dust -->
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="glow glow-hero" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" data-cursor>fahad<span class="slash">/</span>hassan</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#services" data-nav="services">Services</a>
+        <a href="#work" data-nav="work">Work</a>
+        <a href="#about" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+        <a class="nav-cta" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener">Hire me ↗</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero container">
-    <canvas id="particles"></canvas>
-    <h1>Design, development &amp;<br><span class="accent">everything in between</span></h1>
-    <p>I'm Fahad Hassan — a passionate, seasoned &amp; self-taught full stack developer specializing in WordPress, Shopify &amp; AI solutions. Top Rated Plus freelancer on Upwork since September 2015.</p>
-    <a class="btn btn-primary" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener">Hire Me on Upwork</a>
-    <a class="btn btn-ghost" href="chargepk.html">See ChargePK</a>
-  </header>
-
-  <!-- Skills marquee -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track" id="marqueeTrack">
-      <span>WordPress <b>/</b></span><span>Shopify <b>/</b></span><span>AI Solutions <b>/</b></span><span>WooCommerce <b>/</b></span><span>SwiftUI <b>/</b></span><span>API Integrations <b>/</b></span><span>Automation <b>/</b></span><span>E-Commerce <b>/</b></span><span>Custom Plugins <b>/</b></span><span>Top Rated Plus <b>/</b></span>
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="chargepk.html">ChargePK ↗</a>
+    </div>
+    <div class="menu-foot">
+      <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a>
     </div>
   </div>
 
-  <!-- Stats -->
-  <section id="work" style="padding-top: 0;">
-    <div class="container">
-      <div class="grid stats-grid">
-        <div class="card stat">
-          <div class="stat-num">$600K+</div>
-          <p>Total earnings</p>
-        </div>
-        <div class="card stat">
-          <div class="stat-num">58</div>
-          <p>Total jobs</p>
-        </div>
-        <div class="card stat">
-          <div class="stat-num">19,728</div>
-          <p>Total hours</p>
-        </div>
-        <div class="card stat">
-          <div class="stat-num">100%</div>
-          <p>Job Success · Top Rated Plus</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <!-- Services -->
-  <section id="services">
-    <div class="container">
-      <div class="section-label">Services</div>
-      <h2>What I build</h2>
-      <p class="lede">Lines of code that come to life — from full-stack web platforms to native mobile apps, built end to end.</p>
-      <div class="grid">
-        <div class="card">
-          <div class="icon">🌐</div>
-          <h3>WordPress Development</h3>
-          <p>Custom themes, plugins, and complete WordPress builds — fast, secure, and easy to manage. A core specialty across hundreds of client engagements.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🛍️</div>
-          <h3>Shopify &amp; E-Commerce</h3>
-          <p>Shopify stores that convert — theme customization, app integrations, and storefronts built for growth.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🤖</div>
-          <h3>AI Solutions</h3>
-          <p>Practical AI integrations — chatbots, automation, and AI-powered features that solve real business problems.</p>
-        </div>
-        <div class="card">
-          <div class="icon">📱</div>
-          <h3>Mobile Apps</h3>
-          <p>Native iOS apps with SwiftUI — maps, location features, and polished modern UI. ChargePK is the latest.</p>
-        </div>
-      </div>
-      <p style="margin-top: 32px;">
-        <a class="btn btn-primary" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener">View My Upwork Profile →</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- ChargePK -->
-  <section id="chargepk">
-    <div class="container">
-      <div class="section-label">Featured App</div>
-      <h2>ChargePK</h2>
-      <p class="lede">My own product — find EV chargers across Pakistan, on the map, along your route, and at your fingertips.</p>
-
-      <div class="app-hero">
-        <img class="appicon" src="chargepk-icon.png" alt="ChargePK app icon">
-        <div class="app-info">
-          <h3>ChargePK — EV Charger Finder</h3>
-          <p>54+ charging stations across Pakistan's motorways, cities, and northern areas. Plan journeys with chargers mapped along your route, calculate charging times, and navigate straight to any station.</p>
-          <div>
-            <span class="badge">⚡ AC &amp; DC Stations</span>
-            <span class="badge">🗺️ Journey Planner</span>
-            <span class="badge">🔋 Charging Calculator</span>
-            <span class="badge">📍 Live Distances</span>
-          </div>
-          <p style="margin-top:18px; margin-bottom:0;">
-            <a class="btn btn-primary" href="chargepk.html">Learn More →</a>
+    <!-- Hero -->
+    <header class="hero" id="top">
+      <div class="container hero-inner">
+        <p class="eyebrow" id="heroEyebrow">
+          <span class="pulse"></span>
+          Top Rated Plus on Upwork · Available for new projects
+        </p>
+        <h1 class="hero-title" id="heroTitle">
+          <span class="ht-line"><span class="ht-inner">Design,</span></span>
+          <span class="ht-line"><span class="ht-inner">development &amp;</span></span>
+          <span class="ht-line"><span class="ht-inner accent">everything in between.</span></span>
+        </h1>
+        <div class="hero-sub" id="heroSub">
+          <p>
+            I'm <strong>Fahad Hassan</strong> — a self-taught full-stack developer from Lahore,
+            shipping client work since 2015. I build
+            <span class="rotator" id="rotator">
+              <span>WordPress platforms</span>
+              <span>Shopify storefronts</span>
+              <span>AI integrations</span>
+              <span>native iOS apps</span>
+            </span>
           </p>
         </div>
+        <div class="hero-cta" id="heroCta">
+          <a class="btn btn-gold magnetic" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener"><span>Hire me on Upwork</span></a>
+          <a class="btn btn-line magnetic" href="#work"><span>See my work</span></a>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#numbers" id="scrollCue" aria-label="Scroll down">
+        <span class="scroll-cue-track"><span class="scroll-cue-dot"></span></span>
+        scroll
+      </a>
+    </header>
+
+    <!-- Marquee -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee" data-marquee data-dir="1">
+        <div class="marquee-track">
+          <span>WordPress</span><i>✦</i><span>Shopify</span><i>✦</i><span>AI Solutions</span><i>✦</i><span>WooCommerce</span><i>✦</i><span>SwiftUI</span><i>✦</i><span>API Integrations</span><i>✦</i><span>Automation</span><i>✦</i><span>E-Commerce</span><i>✦</i><span>Custom Plugins</span><i>✦</i><span>Top Rated Plus</span><i>✦</i>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Contact CTA -->
-  <section>
-    <div class="container" style="text-align:center;">
-      <h2>Have a project in mind?</h2>
-      <p class="lede" style="margin-left:auto; margin-right:auto;">Let's talk about what you're building.</p>
-      <a class="btn btn-primary" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener">Hire Me on Upwork</a>
-      <a class="btn btn-ghost" href="mailto:contact@fahadhasn.com">Email Me</a>
-    </div>
-  </section>
+    <!-- Numbers -->
+    <section class="numbers" id="numbers" aria-label="Career statistics">
+      <div class="container">
+        <div class="stats" data-reveal-group>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-prefix="$" data-target="600" data-suffix="K+">$600K+</span>
+            <span class="stat-label">earned on Upwork</span>
+          </div>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-target="19728">19,728</span>
+            <span class="stat-label">hours worked</span>
+          </div>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-target="58">58</span>
+            <span class="stat-label">jobs completed</span>
+          </div>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-target="100" data-suffix="%">100%</span>
+            <span class="stat-label">job success score</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Fahad Hassan · fahadhasn.com</p>
-      <div class="links">
-        <a href="privacy.html">Privacy Policy</a>
+    <!-- Services -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-label" data-reveal>01 — Services</span>
+          <h2 data-reveal>What I build</h2>
+          <p class="sec-lede" data-reveal>Lines of code that come to life — from full-stack web platforms to native mobile apps, built end to end.</p>
+        </div>
+        <div class="cards" data-reveal-group>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">01</span>
+            <h3>WordPress Development</h3>
+            <p>Custom themes, plugins, and complete WordPress builds — fast, secure, and easy to manage. A core specialty across hundreds of client engagements.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">02</span>
+            <h3>Shopify &amp; E-Commerce</h3>
+            <p>Shopify stores that convert — theme customization, app integrations, and storefronts built for growth.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">03</span>
+            <h3>AI Solutions</h3>
+            <p>Practical AI integrations — chatbots, automation, and AI-powered features that solve real business problems.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">04</span>
+            <h3>Mobile Apps</h3>
+            <p>Native iOS apps with SwiftUI — maps, location features, and polished modern UI. ChargePK is the latest.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured work: ChargePK -->
+    <section class="feature" id="work">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-label" data-reveal>02 — Featured Work</span>
+          <h2 data-reveal>ChargePK</h2>
+          <p class="sec-lede" data-reveal>My own product — every EV charger in Pakistan on a live map, along your route, and in your pocket.</p>
+        </div>
+        <div class="feature-panel" data-reveal>
+          <div class="feature-info">
+            <img class="feature-icon" src="chargepk-icon.png" alt="ChargePK app icon" width="84" height="84">
+            <h3>EV Charger Finder for Pakistan</h3>
+            <p>54+ AC &amp; DC charging stations across motorways, cities, and the northern areas. Plan journeys with chargers mapped along your route, calculate charging times, and navigate straight to any station.</p>
+            <ul class="feature-tags">
+              <li>⚡ AC &amp; DC stations</li>
+              <li>🗺️ Journey planner</li>
+              <li>🔋 Charging calculator</li>
+              <li>📍 Live distances</li>
+            </ul>
+            <div class="feature-cta">
+              <a class="btn btn-gold magnetic" href="chargepk.html"><span>Explore ChargePK</span></a>
+              <a class="btn btn-line magnetic" href="https://chargepk.com" target="_blank" rel="noopener"><span>chargepk.com ↗</span></a>
+            </div>
+          </div>
+          <div class="feature-shots">
+            <figure class="shot" data-speed="-10"><img src="shot-map.jpg" alt="ChargePK map view with EV chargers across Pakistan" loading="lazy"></figure>
+            <figure class="shot" data-speed="6"><img src="shot-journey.jpg" alt="ChargePK journey planner" loading="lazy"></figure>
+            <figure class="shot" data-speed="-4"><img src="shot-calculator.jpg" alt="ChargePK charging time calculator" loading="lazy"></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="about-side">
+          <span class="sec-label" data-reveal>03 — About</span>
+        </div>
+        <div class="about-body">
+          <p class="about-big" data-reveal>
+            Self-taught, <em>seasoned</em>, and still curious. I've spent a decade turning
+            ideas into <em>products</em> — for clients across the world, and now for
+            <em>Pakistan's EV drivers</em>.
+          </p>
+          <div class="about-cols" data-reveal-group>
+            <div class="reveal-item">
+              <h4>The freelance decade</h4>
+              <p>On Upwork since September 2015 — Top Rated Plus with a 100% Job Success Score, nearly 20,000 hours logged, and $600K+ earned across 58 long-term engagements.</p>
+            </div>
+            <div class="reveal-item">
+              <h4>End to end</h4>
+              <p>Strategy, design, development, deployment — I take products from first sketch to production. WordPress and Shopify by trade, SwiftUI by passion, AI wherever it genuinely helps.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <span class="sec-label" data-reveal>04 — Contact</span>
+        <h2 class="contact-title" data-reveal>Have a project<br>in mind?</h2>
+        <a class="contact-mail" href="mailto:contact@fahadhasn.com" data-reveal data-cursor>
+          contact@fahadhasn.com
+          <span class="mail-line"></span>
+        </a>
+        <div class="contact-meta" data-reveal>
+          <a class="btn btn-gold magnetic" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener"><span>Hire me on Upwork</span></a>
+          <p>Lahore, Pakistan · working worldwide</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Fahad Hassan</p>
+      <div class="footer-links">
+        <a href="chargepk.html">ChargePK</a>
+        <a href="privacy.html">Privacy</a>
         <a href="support.html">Support</a>
+        <a href="#top" id="toTop">Back to top ↑</a>
       </div>
     </div>
   </footer>
 
-  <script>
-    // ── Gold particle field in hero ──
-    (function () {
-      const canvas = document.getElementById('particles');
-      if (!canvas || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const ctx = canvas.getContext('2d');
-      let w, h, parts = [];
-      function size() {
-        const r = canvas.parentElement.getBoundingClientRect();
-        w = canvas.width = r.width; h = canvas.height = r.height;
-      }
-      size(); addEventListener('resize', size);
-      const N = Math.min(46, Math.floor(w / 22));
-      for (let i = 0; i < N; i++) {
-        parts.push({
-          x: Math.random() * w, y: Math.random() * h,
-          r: Math.random() * 1.8 + 0.6,
-          vx: (Math.random() - 0.5) * 0.25,
-          vy: (Math.random() - 0.5) * 0.25,
-          a: Math.random() * 0.5 + 0.15,
-          tw: Math.random() * 0.015 + 0.004
-        });
-      }
-      (function tick() {
-        ctx.clearRect(0, 0, w, h);
-        for (const p of parts) {
-          p.x += p.vx; p.y += p.vy;
-          p.a += p.tw; if (p.a > 0.65 || p.a < 0.1) p.tw *= -1;
-          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-          if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(224, 168, 46, ${p.a})`;
-          ctx.fill();
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="home.js"></script>
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+  <script type="module">
+    // ── Golden dust field (Three.js) ──
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      try {
+        const THREE = await import('three');
+        const canvas = document.getElementById('dust');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'low-power' });
+        renderer.setClearColor(0x000000, 0);
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 120);
+        camera.position.z = 26;
+
+        // Soft round sprite
+        const c = document.createElement('canvas');
+        c.width = c.height = 64;
+        const g = c.getContext('2d').createRadialGradient(32, 32, 0, 32, 32, 32);
+        g.addColorStop(0, 'rgba(255,255,255,1)');
+        g.addColorStop(0.35, 'rgba(255,255,255,0.5)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        const cx = c.getContext('2d');
+        cx.fillStyle = g; cx.fillRect(0, 0, 64, 64);
+        const sprite = new THREE.CanvasTexture(c);
+
+        const isMobile = matchMedia('(max-width: 720px)').matches;
+        const golds = [new THREE.Color('#e0a82e'), new THREE.Color('#f5d255'), new THREE.Color('#fff3c4'), new THREE.Color('#8a6a1d')];
+
+        function makeField(count, size, opacity, spread) {
+          const pos = new Float32Array(count * 3);
+          const col = new Float32Array(count * 3);
+          for (let i = 0; i < count; i++) {
+            pos[i * 3]     = (Math.random() - 0.5) * spread[0];
+            pos[i * 3 + 1] = (Math.random() - 0.5) * spread[1];
+            pos[i * 3 + 2] = (Math.random() - 0.5) * spread[2];
+            const tint = golds[(Math.random() * golds.length) | 0];
+            col[i * 3] = tint.r; col[i * 3 + 1] = tint.g; col[i * 3 + 2] = tint.b;
+          }
+          const geo = new THREE.BufferGeometry();
+          geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+          geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+          const mat = new THREE.PointsMaterial({
+            size, map: sprite, transparent: true, opacity,
+            vertexColors: true, depthWrite: false,
+            blending: THREE.AdditiveBlending, sizeAttenuation: true
+          });
+          return new THREE.Points(geo, mat);
         }
-        requestAnimationFrame(tick);
-      })();
-    })();
 
-    // ── Duplicate marquee for seamless loop ──
-    (function () {
-      const t = document.getElementById('marqueeTrack');
-      if (t) t.innerHTML += t.innerHTML;
-    })();
+        const group = new THREE.Group();
+        group.add(makeField(isMobile ? 450 : 1100, 0.22, 0.55, [70, 44, 36]));
+        group.add(makeField(isMobile ? 60 : 130, 0.55, 0.8, [60, 36, 24]));
+        scene.add(group);
 
-    // ── Scroll-reveal sections & cards ──
-    (function () {
-      const targets = document.querySelectorAll('section .card, section h2, section .lede, .app-hero, .section-label');
-      targets.forEach((el, i) => {
-        el.classList.add('reveal');
-        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
-      });
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+        addEventListener('pointermove', e => {
+          mouse.tx = (e.clientX / innerWidth - 0.5) * 2;
+          mouse.ty = (e.clientY / innerHeight - 0.5) * 2;
+        }, { passive: true });
+
+        function resize() {
+          const w = innerWidth, h = innerHeight;
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+        }
+        resize();
+        addEventListener('resize', resize);
+
+        const clock = new THREE.Clock();
+        renderer.setAnimationLoop(() => {
+          if (document.hidden) return;
+          const t = clock.getElapsedTime();
+          mouse.x += (mouse.tx - mouse.x) * 0.04;
+          mouse.y += (mouse.ty - mouse.y) * 0.04;
+          group.rotation.y = t * 0.02 + mouse.x * 0.12;
+          group.rotation.x = Math.sin(t * 0.05) * 0.04 + mouse.y * 0.08;
+          camera.position.y = -(window.scrollY || 0) * 0.0035;
+          renderer.render(scene, camera);
+          canvas.classList.add('on');
         });
-      }, { threshold: 0.15 });
-      targets.forEach(el => io.observe(el));
-    })();
-
-    // ── Count-up stats when visible ──
-    (function () {
-      const stats = document.querySelectorAll('.stat-num');
-      const ease = t => 1 - Math.pow(1 - t, 3);
-      function animate(el) {
-        const raw = el.textContent.trim();
-        const m = raw.match(/^([^0-9]*)([0-9,]+)(.*)$/);
-        if (!m) return;
-        const target = parseInt(m[2].replace(/,/g, ''), 10);
-        const t0 = performance.now(), dur = 1600;
-        (function step(now) {
-          const p = Math.min((now - t0) / dur, 1);
-          const val = Math.round(target * ease(p));
-          el.textContent = m[1] + val.toLocaleString('en-US') + m[3];
-          if (p < 1) requestAnimationFrame(step);
-        })(t0);
-      }
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.6 });
-      stats.forEach(el => io.observe(el));
-    })();
-
-    // ── Card spotlight follows cursor ──
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        card.style.setProperty('--my', `${e.clientY - r.top}px`);
-      });
-    });
-
-    function toggleMenu(btn) {
-      const links = document.querySelector('nav .links');
-      const open = links.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
+      } catch (e) { /* WebGL unavailable — CSS glow carries the backdrop */ }
     }
-    document.querySelectorAll('nav .links a').forEach(a => {
-      a.addEventListener('click', () => {
-        const links = document.querySelector('nav .links');
-        const btn = document.querySelector('.hamburger');
-        links.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      });
-    });
   </script>
 </body>
 </html>
