@@ -30,16 +30,19 @@ nav {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-nav .brand img { height: 38px; display: block; }
 nav .container {
   display: flex; align-items: center; justify-content: space-between;
   height: 64px;
 }
 nav .brand {
-  font-weight: 800; font-size: 18px; color: var(--text);
-  text-decoration: none;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-weight: 500; font-size: 21px; color: var(--text);
+  text-decoration: none; letter-spacing: -0.5px;
 }
-nav .brand span { color: var(--green); }
+nav .brand .slash {
+  color: var(--green); font-weight: 700; padding: 0 1px;
+}
+nav .brand:hover .slash { color: var(--teal); }
 nav .links a {
   color: var(--muted); text-decoration: none; font-size: 14px;
   margin-left: 24px; font-weight: 500; transition: color 0.2s;
