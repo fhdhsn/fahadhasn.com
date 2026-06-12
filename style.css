@@ -1,12 +1,12 @@
 /* fahadhasn.com — shared styles */
 :root {
-  --bg: #0a0f16;
-  --bg2: #0d141c;
-  --card: #121b26;
-  --green: #00c853;
-  --teal: #00bcd4;
-  --text: #e8edf2;
-  --muted: #8c96a0;
+  --bg: #0b0a12;
+  --bg2: #110f1c;
+  --card: #161325;
+  --green: #8b5cf6;   /* primary purple (kept var name for compatibility) */
+  --teal: #c084fc;    /* light violet accent */
+  --text: #ece9f5;
+  --muted: #97909f;
   --border: rgba(255, 255, 255, 0.08);
 }
 
@@ -26,10 +26,11 @@ body {
 /* Nav */
 nav {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(10, 15, 22, 0.85);
+  background: rgba(11, 10, 18, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
+nav .brand img { height: 38px; display: block; }
 nav .container {
   display: flex; align-items: center; justify-content: space-between;
   height: 64px;
@@ -67,9 +68,9 @@ nav .links a:hover { color: var(--green); }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn-primary {
-  background: linear-gradient(90deg, var(--teal), var(--green));
-  color: #04130a;
-  box-shadow: 0 8px 24px rgba(0, 200, 83, 0.25);
+  background: linear-gradient(90deg, var(--green), #7c3aed);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
 }
 .btn-ghost {
   border: 1px solid var(--border); color: var(--text); margin-left: 12px;
@@ -109,8 +110,8 @@ h2 { font-size: 32px; font-weight: 800; margin-bottom: 14px; letter-spacing: -0.
 /* App showcase */
 .app-hero {
   display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
-  background: linear-gradient(135deg, #0e1c14, #0d1a20);
-  border: 1px solid rgba(0, 200, 83, 0.2);
+  background: linear-gradient(135deg, #18122b, #131027);
+  border: 1px solid rgba(139, 92, 246, 0.25);
   border-radius: 24px; padding: 40px;
 }
 .app-hero img.appicon {
@@ -123,8 +124,8 @@ h2 { font-size: 32px; font-weight: 800; margin-bottom: 14px; letter-spacing: -0.
 .badge {
   display: inline-block; font-size: 12px; font-weight: 700;
   padding: 5px 12px; border-radius: 999px;
-  background: rgba(0, 200, 83, 0.12); color: var(--green);
-  border: 1px solid rgba(0, 200, 83, 0.3); margin-right: 8px; margin-bottom: 8px;
+  background: rgba(139, 92, 246, 0.14); color: var(--teal);
+  border: 1px solid rgba(139, 92, 246, 0.35); margin-right: 8px; margin-bottom: 8px;
 }
 
 /* Legal pages */
