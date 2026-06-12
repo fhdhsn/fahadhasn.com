@@ -1,21 +1,22 @@
 <svg width="200" height="48" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#60A5FA"/>
-      <stop offset="100%" stop-color="#2563EB"/>
+      <stop offset="0%" stop-color="#F5D255"/>
+      <stop offset="55%" stop-color="#E0A82E"/>
+      <stop offset="100%" stop-color="#B07F1A"/>
     </linearGradient>
     <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#93C5FD"/>
-      <stop offset="100%" stop-color="#3B82F6"/>
+      <stop offset="0%" stop-color="#F7DD7A"/>
+      <stop offset="100%" stop-color="#E0A82E"/>
     </linearGradient>
   </defs>
 
   <!-- Monogram mark: rounded square with FH -->
   <rect x="2" y="4" width="40" height="40" rx="12" fill="url(#lg)"/>
   <!-- F -->
-  <path d="M 12 14 L 24 14 L 24 17.5 L 16 17.5 L 16 22 L 22.5 22 L 22.5 25.5 L 16 25.5 L 16 34 L 12 34 Z" fill="white"/>
+  <path d="M 12 14 L 24 14 L 24 17.5 L 16 17.5 L 16 22 L 22.5 22 L 22.5 25.5 L 16 25.5 L 16 34 L 12 34 Z" fill="#241a05"/>
   <!-- H (overlapping slightly, offset right+down) -->
-  <path d="M 25.5 20 L 29 20 L 29 25.2 L 32.5 25.2 L 32.5 20 L 36 20 L 36 34 L 32.5 34 L 32.5 28.7 L 29 28.7 L 29 34 L 25.5 34 Z" fill="white" opacity="0.92"/>
+  <path d="M 25.5 20 L 29 20 L 29 25.2 L 32.5 25.2 L 32.5 20 L 36 20 L 36 34 L 32.5 34 L 32.5 28.7 L 29 28.7 L 29 34 L 25.5 34 Z" fill="#241a05" opacity="0.88"/>
 
   <!-- Wordmark -->
   <text x="52" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
