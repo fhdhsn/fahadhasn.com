@@ -54,6 +54,7 @@ nav .links a:hover { color: var(--green); }
 .hero h1 {
   font-size: clamp(32px, 6vw, 52px); font-weight: 900;
   letter-spacing: -0.02em; margin-bottom: 16px;
+  line-height: normal;
 }
 .hero h1 .accent {
   background: linear-gradient(90deg, var(--teal), var(--green));
