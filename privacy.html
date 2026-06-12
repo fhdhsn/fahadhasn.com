@@ -13,6 +13,9 @@
   <nav>
     <div class="container">
       <a class="brand" href="index.html">fahad<span class="slash">/</span>hassan</a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
+        <span></span><span></span><span></span>
+      </button>
       <div class="links">
         <a href="index.html#about">About</a>
         <a href="index.html#chargepk">ChargePK</a>
@@ -66,5 +69,22 @@
     </div>
   </footer>
 
+  <script>
+    function toggleMenu(btn) {
+      const links = document.querySelector('nav .links');
+      const open = links.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    }
+    document.querySelectorAll('nav .links a').forEach(a => {
+      a.addEventListener('click', () => {
+        const links = document.querySelector('nav .links');
+        const btn = document.querySelector('.hamburger');
+        links.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
 </body>
 </html>
