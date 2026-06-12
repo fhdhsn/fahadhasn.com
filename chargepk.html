@@ -86,13 +86,21 @@
       display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 18px;
     }
-    .shot-placeholder {
-      aspect-ratio: 9 / 19.5; border-radius: 26px;
-      background: linear-gradient(160deg, #121b26, #0d141c);
-      border: 1px dashed rgba(0, 200, 83, 0.3);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.25); font-size: 13px; text-align: center;
-      padding: 12px;
+    .shot { margin: 0; }
+    .shot img {
+      width: 100%; height: auto; display: block;
+      border-radius: 26px;
+      border: 1px solid rgba(0, 200, 83, 0.25);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+    }
+    .shot:hover img {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 200, 83, 0.12);
+    }
+    .shot figcaption {
+      text-align: center; font-size: 13px; color: var(--muted);
+      margin-top: 12px; font-weight: 500;
     }
     .step-num {
       display: inline-flex; align-items: center; justify-content: center;
@@ -221,10 +229,22 @@
       <h2>See it in action</h2>
       <p class="lede">A look inside ChargePK.</p>
       <div class="shots-grid">
-        <div class="shot-placeholder">Map view<br>screenshot coming soon</div>
-        <div class="shot-placeholder">Journey planner<br>screenshot coming soon</div>
-        <div class="shot-placeholder">Charger list<br>screenshot coming soon</div>
-        <div class="shot-placeholder">Calculator<br>screenshot coming soon</div>
+        <figure class="shot">
+          <img src="shot-map.jpg" alt="ChargePK map view showing EV chargers across Pakistan" loading="lazy">
+          <figcaption>Every charger on the map</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="shot-chargers.jpg" alt="ChargePK charger list with AC/DC filters and prices" loading="lazy">
+          <figcaption>Browse, search &amp; filter</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="shot-journey.jpg" alt="ChargePK journey planner with current location and drop pin options" loading="lazy">
+          <figcaption>Plan any route</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="shot-calculator.jpg" alt="ChargePK EV charging time calculator" loading="lazy">
+          <figcaption>Know your charge time</figcaption>
+        </figure>
       </div>
     </div>
   </section>
