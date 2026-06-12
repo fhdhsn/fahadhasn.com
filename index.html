@@ -27,11 +27,19 @@
 
   <!-- Hero -->
   <header class="hero container">
+    <canvas id="particles"></canvas>
     <h1>Design, development &amp;<br><span class="accent">everything in between</span></h1>
     <p>I'm Fahad Hassan — a passionate, seasoned &amp; self-taught full stack developer specializing in WordPress, Shopify &amp; AI solutions. Top Rated Plus freelancer on Upwork since September 2015.</p>
     <a class="btn btn-primary" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener">Hire Me on Upwork</a>
     <a class="btn btn-ghost" href="#chargepk">See ChargePK</a>
   </header>
+
+  <!-- Skills marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>WordPress <b>/</b></span><span>Shopify <b>/</b></span><span>AI Solutions <b>/</b></span><span>WooCommerce <b>/</b></span><span>SwiftUI <b>/</b></span><span>API Integrations <b>/</b></span><span>Automation <b>/</b></span><span>E-Commerce <b>/</b></span><span>Custom Plugins <b>/</b></span><span>Top Rated Plus <b>/</b></span>
+    </div>
+  </div>
 
   <!-- Stats -->
   <section id="work" style="padding-top: 0;">
@@ -138,6 +146,99 @@
   </footer>
 
   <script>
+    // ── Gold particle field in hero ──
+    (function () {
+      const canvas = document.getElementById('particles');
+      if (!canvas || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, parts = [];
+      function size() {
+        const r = canvas.parentElement.getBoundingClientRect();
+        w = canvas.width = r.width; h = canvas.height = r.height;
+      }
+      size(); addEventListener('resize', size);
+      const N = Math.min(46, Math.floor(w / 22));
+      for (let i = 0; i < N; i++) {
+        parts.push({
+          x: Math.random() * w, y: Math.random() * h,
+          r: Math.random() * 1.8 + 0.6,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          a: Math.random() * 0.5 + 0.15,
+          tw: Math.random() * 0.015 + 0.004
+        });
+      }
+      (function tick() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of parts) {
+          p.x += p.vx; p.y += p.vy;
+          p.a += p.tw; if (p.a > 0.65 || p.a < 0.1) p.tw *= -1;
+          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(224, 168, 46, ${p.a})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      })();
+    })();
+
+    // ── Duplicate marquee for seamless loop ──
+    (function () {
+      const t = document.getElementById('marqueeTrack');
+      if (t) t.innerHTML += t.innerHTML;
+    })();
+
+    // ── Scroll-reveal sections & cards ──
+    (function () {
+      const targets = document.querySelectorAll('section .card, section h2, section .lede, .app-hero, .section-label');
+      targets.forEach((el, i) => {
+        el.classList.add('reveal');
+        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+      });
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      targets.forEach(el => io.observe(el));
+    })();
+
+    // ── Count-up stats when visible ──
+    (function () {
+      const stats = document.querySelectorAll('.stat-num');
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      function animate(el) {
+        const raw = el.textContent.trim();
+        const m = raw.match(/^([^0-9]*)([0-9,]+)(.*)$/);
+        if (!m) return;
+        const target = parseInt(m[2].replace(/,/g, ''), 10);
+        const t0 = performance.now(), dur = 1600;
+        (function step(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          const val = Math.round(target * ease(p));
+          el.textContent = m[1] + val.toLocaleString('en-US') + m[3];
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      }
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 });
+      stats.forEach(el => io.observe(el));
+    })();
+
+    // ── Card spotlight follows cursor ──
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+
     function toggleMenu(btn) {
       const links = document.querySelector('nav .links');
       const open = links.classList.toggle('open');
