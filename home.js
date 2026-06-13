@@ -35,27 +35,28 @@
     .add(function () { intro.play(); }, '-=0.55');
 
   // ── Rotating role words ──
-  // Self-scheduling crossfade. Each step explicitly resets the incoming word
-  // right before it animates, so state can never desync (no immediateRender or
-  // repeat-boundary edge cases). JS is authoritative over the CSS initial state.
+  // setInterval-driven so one hiccup can never permanently stall the chain, and
+  // a small pixel crossfade (no yPercent) so a word can't be transformed out of
+  // the clipped slot. Every step kills in-flight tweens and resets the incoming
+  // word, so exactly one word is ever shown. JS is authoritative over the CSS.
   (function () {
     var words = gsap.utils.toArray('#rotator span');
     if (words.length < 2) return;
-    var hold = 2.4, move = 0.55, i = 0;
+    var rise = 14, i = 0;
 
-    gsap.set(words, { yPercent: 100, autoAlpha: 0 });
-    gsap.set(words[0], { yPercent: 0, autoAlpha: 1 });
+    gsap.set(words, { autoAlpha: 0, y: rise });
+    gsap.set(words[0], { autoAlpha: 1, y: 0 });
 
-    function step() {
+    function advance() {
       var current = words[i];
       i = (i + 1) % words.length;
       var next = words[i];
-      gsap.set(next, { yPercent: 100, autoAlpha: 0 });
-      gsap.timeline({ onComplete: function () { gsap.delayedCall(hold, step); } })
-        .to(current, { yPercent: -100, autoAlpha: 0, duration: move, ease: 'power3.in' }, 0)
-        .to(next, { yPercent: 0, autoAlpha: 1, duration: move, ease: 'power3.out' }, move * 0.45);
+      gsap.killTweensOf([current, next]);
+      gsap.set(next, { autoAlpha: 0, y: rise });
+      gsap.to(current, { autoAlpha: 0, y: -rise, duration: 0.5, ease: 'power2.in' });
+      gsap.to(next, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.18 });
     }
-    gsap.delayedCall(hold, step);
+    setInterval(advance, 2600);
   })();
 
   // ── Active nav link ──

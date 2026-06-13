@@ -256,15 +256,15 @@ a { color: inherit; }
 
 .rotator {
   display: inline-grid; vertical-align: bottom;
-  overflow: hidden; height: 1.65em;
+  overflow: hidden; height: 1.7em; line-height: 1.7;
 }
 .rotator span {
-  grid-area: 1 / 1;
+  grid-area: 1 / 1; align-self: center;
   font-weight: 600; white-space: nowrap;
   color: var(--gold-2);
-  opacity: 0; transform: translateY(100%);
+  opacity: 0;
 }
-.rotator span:first-child { opacity: 1; transform: none; }
+.rotator span:first-child { opacity: 1; }
 
 .hero-cta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
 
@@ -669,6 +669,6 @@ section { position: relative; z-index: 1; }
   #preloader { display: none !important; }
   #dust { display: none; }
   .cursor-dot, .cursor-ring { display: none; }
-  .rotator span { opacity: 0; transform: translateY(100%); }
-  .rotator span:first-child { opacity: 1; transform: none; }
+  .rotator span { opacity: 0; }
+  .rotator span:first-child { opacity: 1; }
 }
