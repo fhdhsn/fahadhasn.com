@@ -35,19 +35,27 @@
     .add(function () { intro.play(); }, '-=0.55');
 
   // ── Rotating role words ──
+  // Self-scheduling crossfade. Each step explicitly resets the incoming word
+  // right before it animates, so state can never desync (no immediateRender or
+  // repeat-boundary edge cases). JS is authoritative over the CSS initial state.
   (function () {
     var words = gsap.utils.toArray('#rotator span');
     if (words.length < 2) return;
-    var tl = gsap.timeline({ repeat: -1, delay: 2 });
-    var hold = 2.2, move = 0.55, t = 0;
-    words.forEach(function (w, i) {
-      var next = words[(i + 1) % words.length];
-      tl.to(w, { yPercent: -100, autoAlpha: 0, duration: move, ease: 'power3.in' }, t + hold)
-        .fromTo(next, { yPercent: 100, autoAlpha: 0 },
-          { yPercent: 0, autoAlpha: 1, duration: move, ease: 'power3.out', immediateRender: false },
-          t + hold + move * 0.55);
-      t += hold + move;
-    });
+    var hold = 2.4, move = 0.55, i = 0;
+
+    gsap.set(words, { yPercent: 100, autoAlpha: 0 });
+    gsap.set(words[0], { yPercent: 0, autoAlpha: 1 });
+
+    function step() {
+      var current = words[i];
+      i = (i + 1) % words.length;
+      var next = words[i];
+      gsap.set(next, { yPercent: 100, autoAlpha: 0 });
+      gsap.timeline({ onComplete: function () { gsap.delayedCall(hold, step); } })
+        .to(current, { yPercent: -100, autoAlpha: 0, duration: move, ease: 'power3.in' }, 0)
+        .to(next, { yPercent: 0, autoAlpha: 1, duration: move, ease: 'power3.out' }, move * 0.45);
+    }
+    gsap.delayedCall(hold, step);
   })();
 
   // ── Active nav link ──
