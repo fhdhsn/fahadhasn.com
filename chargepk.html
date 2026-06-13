@@ -9,7 +9,7 @@
   <meta name="author" content="Fahad Hassan">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fahadhasn.com/chargepk.html">
-  <meta name="theme-color" content="#0d141c">
+  <meta name="theme-color" content="#080604">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -42,265 +42,251 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* ChargePK page keeps the app's own green/teal brand */
-    .cpk {
-      --green: #00c853;
-      --teal: #00bcd4;
-      --card: #121b26;
-    }
-    .cpk .btn-primary {
-      background: linear-gradient(90deg, #00bcd4, #00c853);
-      color: #04130a;
-      box-shadow: 0 8px 24px rgba(0, 200, 83, 0.25);
-    }
-    .cpk .badge {
-      background: rgba(0, 200, 83, 0.12); color: #5ee6a8;
-      border-color: rgba(0, 200, 83, 0.3);
-    }
-    .cpk .section-label { color: #00c853; }
-    .cpk .hero h1 .accent {
-      background: linear-gradient(110deg, #00bcd4 20%, #aef7d4 40%, #00c853 60%, #00bcd4 80%);
-      background-size: 250% 100%;
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: shimmer 5s linear infinite;
-    }
-    .cpk .card::before {
-      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
-                  rgba(0, 200, 83, 0.12), transparent 65%);
-    }
-    .cpk .card:hover { border-color: rgba(0, 200, 83, 0.4); }
-    .cpk .stat-num {
-      background: linear-gradient(90deg, #00bcd4, #00c853);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-    }
-    .cpk-hero-icon {
-      width: 130px; height: 130px; border-radius: 30px;
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.55), 0 0 60px rgba(0, 200, 83, 0.18);
-      animation: float 5s ease-in-out infinite;
-      margin-bottom: 28px;
-    }
-    .shots-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
-    }
-    .shot { margin: 0; }
-    .shot img {
-      width: 100%; height: auto; display: block;
-      border-radius: 26px;
-      border: 1px solid rgba(0, 200, 83, 0.25);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
-    }
-    .shot:hover img {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 200, 83, 0.12);
-    }
-    .shot figcaption {
-      text-align: center; font-size: 13px; color: var(--muted);
-      margin-top: 12px; font-weight: 500;
-    }
-    .step-num {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 34px; height: 34px; border-radius: 50%;
-      background: rgba(0, 200, 83, 0.14); color: #00c853;
-      font-weight: 800; font-size: 15px; margin-bottom: 12px;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <noscript><style>.cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
 </head>
 <body class="cpk">
 
-  <nav>
-    <div class="container">
-      <a class="brand" href="index.html">fahad<span class="slash">/</span>hassan</a>
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="links">
-        <a href="index.html">Home</a>
+  <a class="skip-link" href="#features">Skip to content</a>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- Three.js dust (green) -->
+  <canvas id="dust" data-tint="green" aria-hidden="true"></canvas>
+  <div class="glow glow-hero" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" data-cursor>fahad<span class="slash">/</span>hassan</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
         <a href="support.html">Support</a>
+        <a class="nav-cta" href="https://chargepk.com" target="_blank" rel="noopener">chargepk.com ↗</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero container">
-    <img class="cpk-hero-icon" src="chargepk-icon.png" alt="ChargePK app icon">
-    <h1>Never hunt for a<br><span class="accent">charger again.</span></h1>
-    <p>ChargePK puts every EV charging station in Pakistan on your iPhone — on the map, along your route, and in your pocket. Free, no account, no ads.</p>
-    <a class="btn btn-primary" href="#" id="appstore-btn">Coming Soon to the App Store</a>
-    <a class="btn btn-ghost" href="#features">Explore Features</a>
-  </header>
-
-  <!-- Quick stats -->
-  <section style="padding-top: 0;">
-    <div class="container">
-      <div class="grid stats-grid">
-        <div class="card stat"><div class="stat-num">54+</div><p>Charging stations</p></div>
-        <div class="card stat"><div class="stat-num">AC + DC</div><p>All charger types</p></div>
-        <div class="card stat"><div class="stat-num">25 km</div><p>Route search radius</p></div>
-        <div class="card stat"><div class="stat-num">100%</div><p>Free, no ads</p></div>
-      </div>
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu-links">
+      <a href="/">Home</a>
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="support.html">Support</a>
+      <a href="https://chargepk.com" target="_blank" rel="noopener">chargepk.com ↗</a>
     </div>
-  </section>
-
-  <!-- The problem -->
-  <section>
-    <div class="container">
-      <div class="section-label">Why ChargePK</div>
-      <h2>EV ownership in Pakistan shouldn't mean range anxiety</h2>
-      <p class="lede">Electric vehicles are arriving in Pakistan fast — but charging infrastructure information hasn't kept up. Stations are scattered across motorway stops, malls, and fuel stations with no single reliable map. Planning a Lahore-to-Islamabad trip means asking around in Facebook groups and hoping the charger you're counting on actually exists. ChargePK fixes that.</p>
+    <div class="menu-foot">
+      <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a>
     </div>
-  </section>
+  </div>
 
-  <!-- Features -->
-  <section id="features">
-    <div class="container">
-      <div class="section-label">Features</div>
-      <h2>Everything an EV driver needs</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="icon">🗺️</div>
-          <h3>Interactive Charger Map</h3>
-          <p>Every station in Pakistan on a live map — color-coded by AC or DC, with price per kWh and your distance to each. Lahore, Karachi, Islamabad, the motorways, and the northern areas.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🛣️</div>
-          <h3>Journey Planner</h3>
-          <p>Enter your start and destination — by search, current location, or dropping a pin — and see every charger within 25 km of your route, plus total distance and drive time. Long trips, planned in seconds.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🧮</div>
-          <h3>Charging Calculator</h3>
-          <p>Set your charging amperage, battery capacity, and current charge level — get your exact charging time and, if you set when you plug in, the exact time you'll be done.</p>
-        </div>
-        <div class="card">
-          <div class="icon">📋</div>
-          <h3>Full Station Details</h3>
-          <p>Connector types (CCS2, CHAdeMO, Type 2), charging power, prices, amenities, and contact numbers — so you know exactly what's waiting before you arrive.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🧭</div>
-          <h3>One-Tap Navigation</h3>
-          <p>Found your charger? Tap Navigate and you're in turn-by-turn directions instantly. Tap Call to confirm availability before you drive.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🔒</div>
-          <h3>Private by Design</h3>
-          <p>No account, no tracking, no analytics. Your location never leaves your phone — it's processed entirely on-device, only to show you nearby chargers.</p>
+  <main>
+
+    <!-- Hero -->
+    <header class="page-hero">
+      <div class="container">
+        <img class="app-icon" src="chargepk-icon.png" alt="ChargePK app icon" data-hero>
+        <h1 class="page-title">
+          <span class="ht-line"><span class="ht-inner">Never hunt for</span></span>
+          <span class="ht-line"><span class="ht-inner accent">a charger again.</span></span>
+        </h1>
+        <p class="page-lede" data-hero>ChargePK puts every EV charging station in Pakistan on your iPhone — on the map, along your route, and in your pocket. Free, no account, no ads.</p>
+        <div class="hero-cta" data-hero>
+          <a class="btn btn-gold magnetic" href="#"><span>Coming Soon to the App Store</span></a>
+          <a class="btn btn-line magnetic" href="https://chargepk.com" target="_blank" rel="noopener"><span>chargepk.com ↗</span></a>
         </div>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- How it works -->
-  <section>
-    <div class="container">
-      <div class="section-label">How it works</div>
-      <h2>Three steps to a stress-free trip</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="step-num">1</div>
-          <h3>Open the map</h3>
-          <p>See chargers near you instantly, sorted by distance, price, or rating. Filter to DC fast chargers when you're in a hurry.</p>
-        </div>
-        <div class="card">
-          <div class="step-num">2</div>
-          <h3>Plan your route</h3>
-          <p>Heading out of town? The journey planner maps every charging option along the way, so you always know where your next top-up is.</p>
-        </div>
-        <div class="card">
-          <div class="step-num">3</div>
-          <h3>Charge with confidence</h3>
-          <p>Check the price and connectors, calculate your charging time, navigate there, and get back on the road.</p>
+    <!-- Numbers -->
+    <section class="numbers" aria-label="App statistics">
+      <div class="container">
+        <div class="stats" data-reveal-group>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-target="54" data-suffix="+">54+</span>
+            <span class="stat-label">charging stations</span>
+          </div>
+          <div class="stat reveal-item">
+            <span class="stat-num">AC + DC</span>
+            <span class="stat-label">all charger types</span>
+          </div>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-target="25" data-suffix=" km">25 km</span>
+            <span class="stat-label">route search radius</span>
+          </div>
+          <div class="stat reveal-item">
+            <span class="stat-num" data-target="100" data-suffix="%">100%</span>
+            <span class="stat-label">free, no ads</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Screenshots -->
-  <section id="screenshots">
-    <div class="container">
-      <div class="section-label">Screenshots</div>
-      <h2>See it in action</h2>
-      <p class="lede">A look inside ChargePK.</p>
-      <div class="shots-grid">
-        <figure class="shot">
-          <img src="shot-map.jpg" alt="ChargePK map view showing EV chargers across Pakistan" loading="lazy">
-          <figcaption>Every charger on the map</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="shot-chargers.jpg" alt="ChargePK charger list with AC/DC filters and prices" loading="lazy">
-          <figcaption>Browse, search &amp; filter</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="shot-journey.jpg" alt="ChargePK journey planner with current location and drop pin options" loading="lazy">
-          <figcaption>Plan any route</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="shot-calculator.jpg" alt="ChargePK EV charging time calculator" loading="lazy">
-          <figcaption>Know your charge time</figcaption>
-        </figure>
+    <!-- Why -->
+    <section class="about">
+      <div class="container about-grid">
+        <div class="about-side">
+          <span class="sec-label" data-reveal>01 — Why ChargePK</span>
+        </div>
+        <div class="about-body">
+          <p class="about-big" data-reveal>
+            EV ownership in Pakistan shouldn't mean <em>range anxiety</em>.
+            Stations are scattered with no single reliable map — planning a
+            Lahore-to-Islamabad trip means asking around in Facebook groups.
+            <em>ChargePK fixes that.</em>
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA -->
-  <section>
-    <div class="container" style="text-align:center;">
-      <h2>Drive electric. Charge anywhere.</h2>
-      <p class="lede" style="margin-left:auto; margin-right:auto;">ChargePK is launching on the App Store — free for every EV driver in Pakistan.</p>
-      <a class="btn btn-primary" href="#">Coming Soon to the App Store</a>
-      <a class="btn btn-ghost" href="https://chargepk.com" target="_blank" rel="noopener">Visit chargepk.com ↗</a>
-      <a class="btn btn-ghost" href="support.html">Suggest a Charger</a>
-    </div>
-  </section>
+    <!-- Features -->
+    <section class="services" id="features">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-label" data-reveal>02 — Features</span>
+          <h2 data-reveal>Everything an EV driver needs</h2>
+          <p class="sec-lede" data-reveal>Built end to end for Pakistan's roads — from motorway fast chargers to mall parking AC points.</p>
+        </div>
+        <div class="cards cards-3" data-reveal-group>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="icon">🗺️</span>
+            <h3>Interactive Charger Map</h3>
+            <p>Every station in Pakistan on a live map — color-coded by AC or DC, with price per kWh and your distance to each. Lahore, Karachi, Islamabad, the motorways, and the northern areas.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="icon">🛣️</span>
+            <h3>Journey Planner</h3>
+            <p>Enter your start and destination — by search, current location, or dropping a pin — and see every charger within 25 km of your route, plus total distance and drive time.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="icon">🧮</span>
+            <h3>Charging Calculator</h3>
+            <p>Set your charging amperage, battery capacity, and current charge level — get your exact charging time and, if you set when you plug in, the exact time you'll be done.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="icon">📋</span>
+            <h3>Full Station Details</h3>
+            <p>Connector types (CCS2, CHAdeMO, Type 2), charging power, prices, amenities, and contact numbers — so you know exactly what's waiting before you arrive.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="icon">🧭</span>
+            <h3>One-Tap Navigation</h3>
+            <p>Found your charger? Tap Navigate and you're in turn-by-turn directions instantly. Tap Call to confirm availability before you drive.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="icon">🔒</span>
+            <h3>Private by Design</h3>
+            <p>No account, no tracking, no analytics. Your location never leaves your phone — it's processed entirely on-device, only to show you nearby chargers.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Fahad Hassan · <a href="index.html" style="color:inherit;">fahadhasn.com</a></p>
-      <div class="links">
+    <!-- How it works -->
+    <section class="services" id="how">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-label" data-reveal>03 — How it works</span>
+          <h2 data-reveal>Three steps to a stress-free trip</h2>
+        </div>
+        <div class="cards cards-3" data-reveal-group>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">01</span>
+            <h3>Open the map</h3>
+            <p>See chargers near you instantly, sorted by distance, price, or rating. Filter to DC fast chargers when you're in a hurry.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">02</span>
+            <h3>Plan your route</h3>
+            <p>Heading out of town? The journey planner maps every charging option along the way, so you always know where your next top-up is.</p>
+          </article>
+          <article class="card tilt reveal-item" data-cursor>
+            <span class="card-num">03</span>
+            <h3>Charge with confidence</h3>
+            <p>Check the price and connectors, calculate your charging time, navigate there, and get back on the road.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="services" id="screenshots">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-label" data-reveal>04 — Screenshots</span>
+          <h2 data-reveal>See it in action</h2>
+        </div>
+        <div class="gallery" data-reveal-group>
+          <figure class="reveal-item">
+            <img src="shot-map.jpg" alt="ChargePK map view showing EV chargers across Pakistan" loading="lazy">
+            <figcaption>Every charger on the map</figcaption>
+          </figure>
+          <figure class="reveal-item">
+            <img src="shot-chargers.jpg" alt="ChargePK charger list with AC/DC filters and prices" loading="lazy">
+            <figcaption>Browse, search &amp; filter</figcaption>
+          </figure>
+          <figure class="reveal-item">
+            <img src="shot-journey.jpg" alt="ChargePK journey planner with current location and drop pin options" loading="lazy">
+            <figcaption>Plan any route</figcaption>
+          </figure>
+          <figure class="reveal-item">
+            <img src="shot-calculator.jpg" alt="ChargePK EV charging time calculator" loading="lazy">
+            <figcaption>Know your charge time</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact">
+      <div class="container">
+        <span class="sec-label" data-reveal>05 — Get the app</span>
+        <h2 class="contact-title" data-reveal>Drive electric.<br>Charge anywhere.</h2>
+        <p class="sec-lede" data-reveal>ChargePK is launching on the App Store — free for every EV driver in Pakistan.</p>
+        <div class="contact-meta" data-reveal style="margin-top: 36px;">
+          <a class="btn btn-gold magnetic" href="#"><span>Coming Soon to the App Store</span></a>
+          <a class="btn btn-line magnetic" href="support.html"><span>Suggest a charger</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Fahad Hassan</p>
+      <div class="footer-links">
         <a href="https://chargepk.com" target="_blank" rel="noopener">Official Website</a>
-        <a href="privacy.html">Privacy Policy</a>
+        <a href="privacy.html">Privacy</a>
         <a href="support.html">Support</a>
+        <a href="#top" id="toTop">Back to top ↑</a>
       </div>
     </div>
   </footer>
 
-  <script>
-    function toggleMenu(btn) {
-      const links = document.querySelector('nav .links');
-      const open = links.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
-    }
-    document.querySelectorAll('nav .links a').forEach(a => {
-      a.addEventListener('click', () => {
-        const links = document.querySelector('nav .links');
-        const btn = document.querySelector('.hamburger');
-        links.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      });
-    });
-    // Scroll reveals
-    (function () {
-      const targets = document.querySelectorAll('section .card, section h2, section .lede, .section-label, .shot-placeholder');
-      targets.forEach((el, i) => {
-        el.classList.add('reveal');
-        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
-      });
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.15 });
-      targets.forEach(el => io.observe(el));
-    })();
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="site.js"></script>
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
   </script>
+  <script type="module" src="dust.js"></script>
 </body>
 </html>

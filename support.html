@@ -9,7 +9,7 @@
   <meta name="author" content="Fahad Hassan">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fahadhasn.com/support.html">
-  <meta name="theme-color" content="#15120b">
+  <meta name="theme-color" content="#080604">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -31,81 +31,156 @@
   <meta name="twitter:description" content="Help, FAQs, and contact for the ChargePK EV charger app.">
   <meta name="twitter:image" content="https://fahadhasn.com/og-image.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <noscript><style>.cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
 </head>
 <body>
 
-  <nav>
-    <div class="container">
-      <a class="brand" href="index.html">fahad<span class="slash">/</span>hassan</a>
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="links">
-        <a href="index.html">Home</a>
+  <a class="skip-link" href="#faq">Skip to content</a>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- Three.js dust -->
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="glow glow-hero" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" data-cursor>fahad<span class="slash">/</span>hassan</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
         <a href="chargepk.html">ChargePK</a>
-        <a href="support.html">Support</a>
         <a href="privacy.html">Privacy</a>
+        <a class="nav-cta" href="mailto:contact@fahadhasn.com">Email me</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <main class="legal container">
-    <h1>Support</h1>
-    <p class="updated">ChargePK for iOS</p>
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu-links">
+      <a href="/">Home</a>
+      <a href="chargepk.html">ChargePK</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:contact@fahadhasn.com">Email me</a>
+    </div>
+    <div class="menu-foot">
+      <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a>
+    </div>
+  </div>
 
-    <p>Need help with ChargePK, found a bug, or want to suggest a new charging station for the map? Get in touch — I read everything.</p>
+  <main>
 
-    <h2>Contact</h2>
-    <ul>
-      <li>Email: <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a></li>
-    </ul>
+    <!-- Hero -->
+    <header class="page-hero">
+      <div class="container">
+        <span class="sec-label" data-hero>Support · ChargePK for iOS</span>
+        <h1 class="page-title">
+          <span class="ht-line"><span class="ht-inner">Need a hand?</span></span>
+          <span class="ht-line"><span class="ht-inner accent">I read everything.</span></span>
+        </h1>
+        <p class="page-lede" data-hero>Found a bug, want to suggest a new charging station for the map, or have a project in mind? Get in touch.</p>
+        <div class="hero-cta" data-hero>
+          <a class="btn btn-gold magnetic" href="mailto:contact@fahadhasn.com"><span>contact@fahadhasn.com</span></a>
+          <a class="btn btn-line magnetic" href="chargepk.html"><span>About ChargePK</span></a>
+        </div>
+      </div>
+    </header>
 
-    <h2>Frequently Asked Questions</h2>
+    <!-- FAQ -->
+    <section class="services" id="faq">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-label" data-reveal>01 — FAQ</span>
+          <h2 data-reveal>Frequently asked questions</h2>
+        </div>
+        <div class="faq" data-reveal-group>
+          <article class="card reveal-item" data-cursor>
+            <h3>The app can't find my location</h3>
+            <p>Make sure Location Services are enabled for ChargePK in <strong>Settings → Privacy &amp; Security → Location Services</strong>. The app only needs "While Using the App" access.</p>
+          </article>
+          <article class="card reveal-item" data-cursor>
+            <h3>A charger's details are wrong or missing</h3>
+            <p>Charger data is community-sourced. Email the station name and the correction, and it will be fixed in the next update.</p>
+          </article>
+          <article class="card reveal-item" data-cursor>
+            <h3>A new charging station opened — can it be added?</h3>
+            <p>Yes! Send the station name, location (or Google Maps link), charger type (AC/DC), and price if known.</p>
+          </article>
+          <article class="card reveal-item" data-cursor>
+            <h3>The journey planner shows a straight dashed line</h3>
+            <p>That happens when road routing isn't available for a segment. The dashed line is an estimate; charger results along the corridor still work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <h2 style="font-size:16px;">The app can't find my location</h2>
-    <p>Make sure Location Services are enabled for ChargePK in <strong>Settings → Privacy &amp; Security → Location Services</strong>. The app only needs "While Using the App" access.</p>
+    <!-- Bug reports -->
+    <section class="about" style="padding-top: 0;">
+      <div class="container about-grid">
+        <div class="about-side">
+          <span class="sec-label" data-reveal>02 — Bug reports</span>
+        </div>
+        <div class="about-body">
+          <p class="about-big" data-reveal>
+            When reporting a bug, include your <em>iPhone model</em>,
+            <em>iOS version</em>, and a screenshot if possible — it makes
+            the fix land faster.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <h2 style="font-size:16px;">A charger's details are wrong or missing</h2>
-    <p>Charger data is community-sourced. Email the station name and the correction, and it will be fixed in the next update.</p>
+    <!-- Contact -->
+    <section class="contact" style="padding-top: 0;">
+      <div class="container">
+        <span class="sec-label" data-reveal>03 — Contact</span>
+        <h2 class="contact-title" data-reveal>One inbox<br>for everything.</h2>
+        <a class="contact-mail" href="mailto:contact@fahadhasn.com" data-reveal data-cursor>
+          contact@fahadhasn.com
+          <span class="mail-line"></span>
+        </a>
+        <div class="contact-meta" data-reveal>
+          <a class="btn btn-gold magnetic" href="https://www.upwork.com/freelancers/~01f7b7b317cc0c96fc" target="_blank" rel="noopener"><span>Hire me on Upwork</span></a>
+          <p>App support · charger suggestions · freelance projects</p>
+        </div>
+      </div>
+    </section>
 
-    <h2 style="font-size:16px;">A new charging station opened — can it be added?</h2>
-    <p>Yes! Send the station name, location (or Google Maps link), charger type (AC/DC), and price if known.</p>
-
-    <h2 style="font-size:16px;">The journey planner shows a straight dashed line instead of a road route</h2>
-    <p>That happens when road routing isn't available for a segment. The dashed line is an estimate; charger results along the corridor still work.</p>
-
-    <h2>Reporting Bugs</h2>
-    <p>When reporting a bug, it helps to include your iPhone model, iOS version, and a screenshot if possible.</p>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Fahad Hassan · fahadhasn.com</p>
-      <div class="links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="support.html">Support</a>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Fahad Hassan</p>
+      <div class="footer-links">
+        <a href="chargepk.html">ChargePK</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="#top" id="toTop">Back to top ↑</a>
       </div>
     </div>
   </footer>
 
-  <script>
-    function toggleMenu(btn) {
-      const links = document.querySelector('nav .links');
-      const open = links.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
-    }
-    document.querySelectorAll('nav .links a').forEach(a => {
-      a.addEventListener('click', () => {
-        const links = document.querySelector('nav .links');
-        const btn = document.querySelector('.hamburger');
-        links.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      });
-    });
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="site.js"></script>
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
   </script>
+  <script type="module" src="dust.js"></script>
 </body>
 </html>

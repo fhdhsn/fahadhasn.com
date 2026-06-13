@@ -9,7 +9,7 @@
   <meta name="author" content="Fahad Hassan">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://fahadhasn.com/privacy.html">
-  <meta name="theme-color" content="#15120b">
+  <meta name="theme-color" content="#080604">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -31,86 +31,139 @@
   <meta name="twitter:description" content="ChargePK collects no personal data. Location is processed entirely on your device.">
   <meta name="twitter:image" content="https://fahadhasn.com/og-image.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <noscript><style>.cursor-dot, .cursor-ring { display: none !important; }</style></noscript>
 </head>
 <body>
 
-  <nav>
-    <div class="container">
-      <a class="brand" href="index.html">fahad<span class="slash">/</span>hassan</a>
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu(this)">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="links">
-        <a href="index.html">Home</a>
+  <a class="skip-link" href="#policy">Skip to content</a>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- Three.js dust -->
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="glow glow-hero" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/" data-cursor>fahad<span class="slash">/</span>hassan</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
         <a href="chargepk.html">ChargePK</a>
         <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
+        <a class="nav-cta" href="mailto:contact@fahadhasn.com">Email me</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <main class="legal container">
-    <h1>Privacy Policy</h1>
-    <p class="updated">ChargePK for iOS · Last updated: June 12, 2026</p>
+  <!-- Mobile menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu-links">
+      <a href="/">Home</a>
+      <a href="chargepk.html">ChargePK</a>
+      <a href="support.html">Support</a>
+      <a href="mailto:contact@fahadhasn.com">Email me</a>
+    </div>
+    <div class="menu-foot">
+      <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a>
+    </div>
+  </div>
 
-    <p>This Privacy Policy describes how the ChargePK app ("the App") handles your information. The short version: <strong>ChargePK does not collect, store, or share your personal data.</strong></p>
+  <main>
 
-    <h2>Location Data</h2>
-    <p>ChargePK requests access to your device's location for one purpose only: to show EV charging stations near you, calculate distances to stations, and let you use your current position as a journey starting point.</p>
-    <ul>
-      <li>Your location is processed <strong>entirely on your device</strong>.</li>
-      <li>It is <strong>never transmitted</strong> to us or any third party.</li>
-      <li>It is <strong>never stored</strong> — it exists only in memory while the App is in use.</li>
-      <li>Location access is optional. The App works without it; you simply won't see distances from your position.</li>
-    </ul>
+    <!-- Hero -->
+    <header class="page-hero">
+      <div class="container">
+        <span class="sec-label" data-hero>Privacy Policy · ChargePK for iOS</span>
+        <h1 class="page-title">
+          <span class="ht-line"><span class="ht-inner">Your data</span></span>
+          <span class="ht-line"><span class="ht-inner accent">stays yours.</span></span>
+        </h1>
+        <p class="page-lede" data-hero>The short version: <strong>ChargePK does not collect, store, or share your personal data.</strong> Location is processed entirely on your device.</p>
+        <div class="hero-cta" data-hero>
+          <span class="updated-chip">Last updated: June 12, 2026</span>
+        </div>
+      </div>
+    </header>
 
-    <h2>Data We Collect</h2>
-    <p>None. ChargePK has no user accounts, no analytics, no advertising, no tracking, and no server of its own. We cannot see who you are, where you are, or how you use the App.</p>
+    <!-- Policy body -->
+    <section class="legal-body container" id="policy">
+      <div data-reveal>
+        <h2>Location Data</h2>
+        <p>ChargePK requests access to your device's location for one purpose only: to show EV charging stations near you, calculate distances to stations, and let you use your current position as a journey starting point.</p>
+        <ul>
+          <li>Your location is processed <strong>entirely on your device</strong>.</li>
+          <li>It is <strong>never transmitted</strong> to us or any third party.</li>
+          <li>It is <strong>never stored</strong> — it exists only in memory while the App is in use.</li>
+          <li>Location access is optional. The App works without it; you simply won't see distances from your position.</li>
+        </ul>
+      </div>
 
-    <h2>Third-Party Services</h2>
-    <p>The App uses Apple's MapKit framework to display maps, calculate routes, and search locations. These requests are handled by Apple under <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>. ChargePK does not add any identifying information to these requests.</p>
+      <div data-reveal>
+        <h2>Data We Collect</h2>
+        <p>None. ChargePK has no user accounts, no analytics, no advertising, no tracking, and no server of its own. We cannot see who you are, where you are, or how you use the App.</p>
+      </div>
 
-    <h2>Charging Station Data</h2>
-    <p>Charger locations, prices, and details shown in the App are community-sourced reference data bundled with the App. They involve no personal information.</p>
+      <div data-reveal>
+        <h2>Third-Party Services</h2>
+        <p>The App uses Apple's MapKit framework to display maps, calculate routes, and search locations. These requests are handled by Apple under <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a>. ChargePK does not add any identifying information to these requests.</p>
+      </div>
 
-    <h2>Children's Privacy</h2>
-    <p>ChargePK does not collect data from anyone, including children under 13.</p>
+      <div data-reveal>
+        <h2>Charging Station Data</h2>
+        <p>Charger locations, prices, and details shown in the App are community-sourced reference data bundled with the App. They involve no personal information.</p>
+      </div>
 
-    <h2>Changes to This Policy</h2>
-    <p>If the App's data practices ever change, this page will be updated and the "Last updated" date revised before the change takes effect.</p>
+      <div data-reveal>
+        <h2>Children's Privacy</h2>
+        <p>ChargePK does not collect data from anyone, including children under 13.</p>
+      </div>
 
-    <h2>Contact</h2>
-    <p>Questions about this policy? Visit the <a href="support.html">support page</a> or email <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a>.</p>
+      <div data-reveal>
+        <h2>Changes to This Policy</h2>
+        <p>If the App's data practices ever change, this page will be updated and the "Last updated" date revised before the change takes effect.</p>
+      </div>
+
+      <div data-reveal>
+        <h2>Contact</h2>
+        <p>Questions about this policy? Visit the <a href="support.html">support page</a> or email <a href="mailto:contact@fahadhasn.com">contact@fahadhasn.com</a>.</p>
+      </div>
+    </section>
+
   </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Fahad Hassan · fahadhasn.com</p>
-      <div class="links">
-        <a href="privacy.html">Privacy Policy</a>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Fahad Hassan</p>
+      <div class="footer-links">
+        <a href="chargepk.html">ChargePK</a>
         <a href="support.html">Support</a>
+        <a href="#top" id="toTop">Back to top ↑</a>
       </div>
     </div>
   </footer>
 
-  <script>
-    function toggleMenu(btn) {
-      const links = document.querySelector('nav .links');
-      const open = links.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
-    }
-    document.querySelectorAll('nav .links a').forEach(a => {
-      a.addEventListener('click', () => {
-        const links = document.querySelector('nav .links');
-        const btn = document.querySelector('.hamburger');
-        links.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      });
-    });
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="site.js"></script>
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
   </script>
+  <script type="module" src="dust.js"></script>
 </body>
 </html>
