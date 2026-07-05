@@ -456,6 +456,50 @@ section { position: relative; z-index: 1; }
 .shot:nth-child(2) { width: 42%; right: 8%; top: 0; transform: rotate(4deg); z-index: 1; }
 .shot:nth-child(3) { width: 40%; right: 0; bottom: -4%; transform: rotate(-2deg); z-index: 3; }
 
+/* Two stacked product panels */
+.feature-panel + .feature-panel { margin-top: clamp(28px, 4vw, 48px); }
+
+/* App-name kicker + coming-soon label */
+.feature-name {
+  display: inline-block;
+  font-family: var(--font-display); font-size: 13px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: #5ee6a8; margin-bottom: 12px;
+}
+.feature-soon {
+  align-self: center;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--muted);
+}
+
+/* Reversed panel — screenshots on the left, copy on the right */
+.feature-reverse { grid-template-columns: 1.1fr minmax(320px, 1fr); }
+.feature-reverse .feature-info { order: 2; }
+.feature-reverse .feature-shots { order: 1; }
+
+/* RemitPK — "Meridian Ledger" blue theme on the dark homepage */
+.feature-remit {
+  background:
+    radial-gradient(900px circle at 10% -10%, rgba(47, 94, 222, 0.18), transparent 55%),
+    linear-gradient(150deg, #0d1428, #0a0f1e 60%);
+  border-color: rgba(47, 94, 222, 0.34);
+}
+.feature-remit .feature-icon {
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55), 0 0 55px rgba(47, 94, 222, 0.3);
+}
+.feature-remit .feature-name { color: #8fb0ff; }
+.feature-remit .feature-tags li {
+  background: rgba(47, 94, 222, 0.15); color: #a9c2ff;
+  border-color: rgba(47, 94, 222, 0.42);
+}
+.feature-remit .feature-cta .btn-gold {
+  background: linear-gradient(135deg, #3f6fe6, #2450c9 60%, #1c3fa6);
+  color: #eaf1ff;
+  box-shadow: 0 10px 30px rgba(36, 80, 201, 0.35);
+}
+.feature-remit .feature-cta .btn-gold:hover { box-shadow: 0 14px 40px rgba(36, 80, 201, 0.5); }
+.feature-remit .feature-cta .btn-line:hover { border-color: rgba(47, 94, 222, 0.55); color: #a9c2ff; }
+.feature-remit .shot img { border-color: rgba(47, 94, 222, 0.38); }
+
 /* ───────── About ───────── */
 .about-grid { display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
 .about-side .sec-label { position: sticky; top: 110px; }
@@ -517,7 +561,8 @@ section { position: relative; z-index: 1; }
 
 /* ───────── Responsive ───────── */
 @media (max-width: 900px) {
-  .feature-panel { grid-template-columns: 1fr; }
+  .feature-panel, .feature-reverse { grid-template-columns: 1fr; }
+  .feature-reverse .feature-info, .feature-reverse .feature-shots { order: 0; }
   .feature-shots {
     position: static; min-height: 0;
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
